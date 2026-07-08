@@ -1,15 +1,16 @@
 package ar.edu.utn.frba.ddsi.alertas.models.entities.evaluador;
 
 import ar.edu.utn.frba.ddsi.alertas.models.entities.DatosClima;
+import ar.edu.utn.frba.ddsi.alertas.models.entities.evaluador.interfaces.CondicionAlerta;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
 public class EvaluadorAlerta {
-  private final List<CondicionTemperaturaYHumedad> condiciones;
+  private final List<CondicionAlerta> condiciones;
   private DatosClima ultimoClimaDisparador = null;
 
-  public EvaluadorAlerta(List<CondicionTemperaturaYHumedad> condiciones) {
+  public EvaluadorAlerta(List<CondicionAlerta> condiciones) {
     this.condiciones = condiciones;
   }
 
