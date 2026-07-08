@@ -12,9 +12,11 @@ interface CondicionAlerta
 class CondicionTemperaturaYHumedad
 
 DatosClima <-- Alerta
+DatosClima <-- EvaluadorAlerta
 ClienteWeatherApi <|.. ProveedorClima
 Cartero <|.. DespachadorNotificaciones
 CondicionAlerta <|-- EvaluadorAlerta
+
 CondicionTemperaturaYHumedad <|.. CondicionAlerta
 
 class DatosClima {
