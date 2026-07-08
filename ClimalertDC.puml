@@ -4,7 +4,7 @@
 class DatosClima
 class Alerta
 interface ProveedorClima
-class clienteWeatherApi
+class ClienteWeatherApi
 interface DespachadorNotificaciones
 class Cartero
 class EvaluadorAlerta
@@ -12,7 +12,7 @@ interface CondicionAlerta
 class CondicionTemperaturaYHumedad
 
 DatosClima <-- Alerta
-clienteWeatherApi <|.. ProveedorClima
+ClienteWeatherApi <|.. ProveedorClima
 Cartero <|.. DespachadorNotificaciones
 CondicionAlerta <|-- EvaluadorAlerta
 CondicionTemperaturaYHumedad <|.. CondicionAlerta
@@ -37,7 +37,7 @@ interface ProveedorClima {
 DatosClima traerClimaActual(String ubicacion)
 }
 
-class clienteWeatherApi {
+class ClienteWeatherApi {
 RestClient cliente
 String llaveApi
 String urlBase
@@ -55,7 +55,9 @@ void enviarAlerta(Alerta alerta)
 
 class EvaluadorAlerta {
 List<CondicionAlerta> condiciones
+DatosClima ultimoClimaDisparador
 boolean disparaAlerta(DatosClima clima)
+void marcarComoAlertado(DatosClima clima)
 }
 
 interface CondicionAlerta {
