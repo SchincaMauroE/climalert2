@@ -1,0 +1,74 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class DatosClima
+class Alerta
+interface ProveedorClima
+class clienteWeatherApi
+interface DespachadorNotificaciones
+class Cartero
+class EvaluadorAlerta
+interface CondicionAlerta
+class CondicionTemperaturaYHumedad
+
+DatosClima <-- Alerta
+clienteWeatherApi <|.. ProveedorClima
+Cartero <|.. DespachadorNotificaciones
+CondicionAlerta <|-- EvaluadorAlerta
+CondicionTemperaturaYHumedad <|.. CondicionAlerta
+
+class DatosClima {
+Long id
+LocalDateTime timestamp
+double temperatura
+double humedad
+String ubicacion
+}
+
+class Alerta {
+Long id
+LocalDateTime fechaCreacion
+DatosClima clima
+List<String> destinatarios
+boolean enviado
+}
+
+interface ProveedorClima {
+DatosClima traerClimaActual(String ubicacion)
+}
+
+class clienteWeatherApi {
+RestClient cliente
+String llaveApi
+String urlBase
+
+DatosClima traerClimaActual(String ubicacion)
+}
+
+interface DespachadorNotificaciones {
+void enviarAlerta(Alerta alerta)
+}
+
+class Cartero {
+void enviarAlerta(Alerta alerta)
+}
+
+class EvaluadorAlerta {
+List<CondicionAlerta> condiciones
+boolean disparaAlerta(DatosClima clima)
+}
+
+interface CondicionAlerta {
+boolean cumple(DatosClima clima)
+}
+
+class CondicionTemperaturaYHumedad {
+double marcaTemperatura
+double marcaHumedad
+
+cumple(DatosClima clima)
+}
+
+
+
+@enduml
